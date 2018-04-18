@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Android_MockProject_G6</string>
+
+    <string name="timetable">Time Table</string>
+    <string name="lesson_list">Lesson name list</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_lesson_name">Edit lesson name</string>
+    <string name="cancel_editing">Cancel editing</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="timetable_editor_screen">Timetable Editor Screen</string>
+    <string name="button_edit">Edit lesson name</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="r_bin">R-Bin</string>
+    <string-array name="array_days_of_week">
+        <item> </item>
+        <item>@string/monday</item>
+        <item>@string/tuesday</item>
+        <item>@string/wednesday</item>
+        <item>@string/thursday</item>
+        <item>@string/friday</item>
+        <item>@string/saturday</item>
+    </string-array>
+
+    <string name="recycle_bin">Recycle bin</string>
+
+    <string name="lesson_1">Lesson 1</string>
+    <string name="lesson_2">Lesson 2</string>
+    <string name="lesson_3">Lesson 3</string>
+    <string name="lesson_4">Lesson 4</string>
+    <string name="lesson_5">Lesson 5</string>
+    <string name="lesson_6">Lesson 6</string>
+
+    <string-array name="array_lesson_numbers">
+        <item>@string/lesson_1</item>
+        <item>@string/lesson_2</item>
+        <item>@string/lesson_3</item>
+        <item>@string/lesson_4</item>
+        <item>@string/lesson_5</item>
+        <item>@string/lesson_6</item>
+    </string-array>
+
+    <string name="lesson_existed_warning">Lesson name existed!</string>
+    <string name="lesson_empty_warning">Lesson name can\'t be blank!</string>
+    <string name="add_lesson_name">Add lesson name</string>
+    <string name="list_of_lesson_name">List of lesson name</string>
+    <string name="_16_21_04_2018">16 - 21/04/2018</string>
+
+    <string-array name="array_lesson_names">
+        <item>Math</item>
+        <item>Literature</item>
+        <item>English</item>
+        <item>History</item>
+        <item>Geography</item>
+        <item>Biology</item>
+        <item>Physics</item>
+        <item>Exercise</item>
+        <item>Technology</item>
+        <item>IT</item>
+        <item>Civic Edu</item>
+        <item>Assembly</item>
+        <item>Class Meeting</item>
+    </string-array>
+</resources>
