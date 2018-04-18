@@ -127,6 +127,7 @@ public class GridViewAdapter extends BaseAdapter {
 //                                View dropTarget = v;
 //                                // Make desired changes to the drop target below
 //                                dropTarget.setTag("dropped");
+
 //                                // Get owner of the dragged view and remove the view (if needed)
 //                                ViewGroup owner = (ViewGroup) draggedView.getParent();
 //                                owner.removeView(draggedView);
