@@ -2,6 +2,7 @@ package group6.fga.fsoft.com.mockproject_group6.controller;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.SparseArray;
 
 
 import group6.fga.fsoft.com.mockproject_group6.DBManager;
@@ -9,11 +10,79 @@ import group6.fga.fsoft.com.mockproject_group6.MainActivity;
 
 public class Controller {
     public static final String TAG = Controller.class.getName();
-    private DBManager dbManager;
+    public static final int DROP_STATE = 1;
+    public static final int LOAD_DATA_STATE = 2;
+    public static final int SAVE_DATA_STATE = 3;
+    public static final int UPDATE_LESSON_STATE = 4;
+    public static final int EDIT_LESSON_NAME_STATE = 5;
+    public static final int ADD_LESSON_NAME_TO_LIST_STATE = 6;
+
+    private MsgHandler mMsgHandler;
     private MainActivity mMainActivity;
 
-    DBManager getDBManager() {
-        return dbManager;
+    private SparseArray<BaseState> mStates;
+    private BaseState currentState;
+
+//    private DBManager dbManager;
+//    DBManager getDBManager() {
+//        return dbManager;
+//    }
+
+    public Controller(MainActivity mMainActivity) {
+        this.mMainActivity = mMainActivity;
+        mMsgHandler = new MsgHandler(this);
+        mStates = initState();
+    }
+
+    public void sendMessage(Message msg) {
+
+        mMsgHandler.sendMessage(msg);
+    }
+
+    private void handleMsg(Message msg) {
+
+        switch (msg.what){
+            case DROP_STATE:
+                currentState = mStates.get(DROP_STATE);
+
+                break;
+            case LOAD_DATA_STATE:
+                currentState = mStates.get(LOAD_DATA_STATE);
+
+                break;
+            case SAVE_DATA_STATE:
+                currentState = mStates.get(SAVE_DATA_STATE);
+
+                break;
+            case UPDATE_LESSON_STATE:
+                currentState = mStates.get(UPDATE_LESSON_STATE);
+
+                break;
+            case EDIT_LESSON_NAME_STATE:
+                currentState = mStates.get(EDIT_LESSON_NAME_STATE);
+
+                break;
+            case ADD_LESSON_NAME_TO_LIST_STATE:
+                currentState = mStates.get(ADD_LESSON_NAME_TO_LIST_STATE);
+
+                break;
+
+        }
+
+        currentState.handleMsg(msg);
+
+    }
+
+    private SparseArray<BaseState> initState(){
+        SparseArray<BaseState> states = new SparseArray<>();
+        states.put(DROP_STATE,new DropState(this));
+        states.put(LOAD_DATA_STATE,new LoadDataState(this));
+        states.put(SAVE_DATA_STATE,new SaveDataState(this));
+        states.put(UPDATE_LESSON_STATE,new UpdateLessonState(this));
+        states.put(EDIT_LESSON_NAME_STATE,new EditLessonNameState(this));
+        states.put(ADD_LESSON_NAME_TO_LIST_STATE,new AddLessonNameToList(this));
+
+        return states;
     }
 
     public MainActivity getMainActivity() {
@@ -21,9 +90,20 @@ public class Controller {
     }
 
     private static class MsgHandler extends Handler {
+
+        private Controller mController;
+
+        public MsgHandler(Controller mController) {
+            super();
+            this.mController = mController;
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+            mController.handleMsg(msg);
         }
     }
+
+
+
 }
