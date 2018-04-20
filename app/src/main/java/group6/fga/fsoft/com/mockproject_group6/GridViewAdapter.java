@@ -25,6 +25,7 @@ public class GridViewAdapter extends BaseAdapter {
     public static final int TITLE_ITEM = 1;
     public static final int GRID_LESSON = 2;
     public static final int GRID_TIMETABLE = 3;
+    private boolean mDraggable = true;
 
     private List<Object> mList;
     private LayoutInflater mInflater;
@@ -34,6 +35,10 @@ public class GridViewAdapter extends BaseAdapter {
 
     public interface OnCellDroppedListener {
         void onCellDrop(int startPosition, int fromTable, int dropPosition, int toTable);
+    }
+
+    public void setDraggable(boolean isDraggable) {
+        mDraggable = isDraggable;
     }
 
     public void setOnCellDroppedListener(OnCellDroppedListener listener) {
@@ -86,30 +91,38 @@ public class GridViewAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
+
         switch (getItemViewType(i)) {
             case LESSON_ITEM:
+
                 Lesson lesson = (Lesson) mList.get(i);
                 holder.textView.setText(lesson.getName());
                 if (!lesson.getName().equals("")) {
+
                     holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
+
                         @Override
                         public boolean onLongClick(View view) {
+
+                            if (!mDraggable) {
+                                return false;
+                            } else {
+
 //                        Log.e("startPosition", String.valueOf(i));
 //                        Log.e("fromTable", mGridType == 2 ? "GRID_LESSON" : "GRID_TIMETABLE");
 
-                            String text = i + " " + mGridType;
-                            ClipData data = ClipData.newPlainText("text", text);
+                                String text = i + " " + mGridType;
+                                ClipData data = ClipData.newPlainText("text", text);
 
-                            // Construct draggable shadow for view
-                            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-                            // Start the drag of the shadow
-                            view.startDrag(data, shadowBuilder, view, 0);
-                            // Hide the actual view as shadow is being dragged
-//                        view.setVisibility(View.INVISIBLE);
+                                // Construct draggable shadow for view
+                                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+                                // Start the drag of the shadow
+                                view.startDrag(data, shadowBuilder, view, 0);
+                                // Hide the actual view as shadow is being dragged
+                                ((LinearLayout) view).getChildAt(0).setVisibility(View.INVISIBLE);
 
-                            ((LinearLayout) view).getChildAt(0).setVisibility(View.INVISIBLE);
-
-                            return true;
+                                return true;
+                            }
                         }
                     });
                 }

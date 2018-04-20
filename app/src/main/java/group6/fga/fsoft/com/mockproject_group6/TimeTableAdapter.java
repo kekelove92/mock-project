@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import group6.fga.fsoft.com.mockproject_group6.model.Contract;
-import group6.fga.fsoft.com.mockproject_group6.model.entity.TimetableCell;
+import group6.fga.fsoft.com.mockproject_group6.model.entity.Timetable;
 
 
 public class TimeTableAdapter {
@@ -30,9 +30,9 @@ public class TimeTableAdapter {
     }
 
     // Update
-    public boolean updateTimeTable(ArrayList<TimetableCell> timeTableArrayList) {
+    public boolean updateTimeTable(ArrayList<Timetable> timeTableArrayList) {
         mSqLiteDatabase.delete(Contract.TABLE_TIME, null, null);
-        for (TimetableCell timeTable : timeTableArrayList) {
+        for (Timetable timeTable : timeTableArrayList) {
             int row = timeTable.getRow();
             int column = timeTable.getCol();
             int lesson_id = timeTable.getLessonID();

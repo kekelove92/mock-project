@@ -3,13 +3,13 @@ package group6.fga.fsoft.com.mockproject_group6.model.entity;
 /**
  * Created by TungAnh on 4/16/18.
  */
-public class TimetableCell {
+public class Timetable {
     private int mLessonID;
     private String mLessonName;
     private int mCol;
     private int mRow;
 
-    public TimetableCell(int lessonID, String lessonName, int col, int row) {
+    public Timetable(int lessonID, String lessonName, int col, int row) {
         mLessonID = lessonID;
         mLessonName = lessonName;
         mCol = col;
@@ -50,7 +50,7 @@ public class TimetableCell {
 
     @Override
     public String toString() {
-        return "TimetableCell{" +
+        return "Timetable{" +
             "mLessonID=" + mLessonID +
             ", mLessonName='" + mLessonName + '\'' +
             ", mCol=" + mCol +

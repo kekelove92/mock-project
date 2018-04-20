@@ -5,7 +5,6 @@ import android.os.Message;
 import android.util.SparseArray;
 
 
-import group6.fga.fsoft.com.mockproject_group6.DBManager;
 import group6.fga.fsoft.com.mockproject_group6.MainActivity;
 
 public class Controller {
@@ -16,6 +15,7 @@ public class Controller {
     public static final int UPDATE_LESSON_STATE = 4;
     public static final int EDIT_LESSON_NAME_STATE = 5;
     public static final int ADD_LESSON_NAME_TO_LIST_STATE = 6;
+    public static final int DIM_VIEW_STATE = 7;
 
     private MsgHandler mMsgHandler;
     private MainActivity mMainActivity;
@@ -66,7 +66,10 @@ public class Controller {
                 currentState = mStates.get(ADD_LESSON_NAME_TO_LIST_STATE);
 
                 break;
+            case DIM_VIEW_STATE:
+                currentState = mStates.get(DIM_VIEW_STATE);
 
+                break;
         }
 
         currentState.handleMsg(msg);
@@ -80,7 +83,8 @@ public class Controller {
         states.put(SAVE_DATA_STATE,new SaveDataState(this));
         states.put(UPDATE_LESSON_STATE,new UpdateLessonState(this));
         states.put(EDIT_LESSON_NAME_STATE,new EditLessonNameState(this));
-        states.put(ADD_LESSON_NAME_TO_LIST_STATE,new AddLessonNameToList(this));
+        states.put(ADD_LESSON_NAME_TO_LIST_STATE,new AddLessonNameToListState(this));
+        states.put(DIM_VIEW_STATE,new DimViewState(this));
 
         return states;
     }

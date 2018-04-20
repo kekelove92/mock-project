@@ -7,10 +7,10 @@ import android.util.Log;
  * Created by Tu on 19-Apr-18.
  */
 
-class AddLessonNameToList extends BaseState {
-    public static final String TAG = AddLessonNameToList.class.getName();
+class AddLessonNameToListState extends BaseState {
+    public static final String TAG = AddLessonNameToListState.class.getName();
 
-    public AddLessonNameToList(Controller controller) {
+    public AddLessonNameToListState(Controller controller) {
         super(controller);
     }
 
