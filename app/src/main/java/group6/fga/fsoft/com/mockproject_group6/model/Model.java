@@ -45,12 +45,12 @@ public class Model {
         return mTimetableList;
     }
 
-    public void setTimetableCellList(List<Object> newTimetableList) {
+    public void setTimetable(List<Object> newTimetableList) {
         mTimetableList = newTimetableList;
         mPropertyChangeSupport.firePropertyChange(UPDATE_TIMETABLE, null, newTimetableList);
     }
 
-    public boolean isEditingLesson() {
+    public boolean ismEditingLesson() {
         return mEditingLesson;
     }
 

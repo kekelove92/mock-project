@@ -1,7 +1,8 @@
-package group6.fga.fsoft.com.mockproject_group6;
+package group6.fga.fsoft.com.mockproject_group6.view;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import group6.fga.fsoft.com.mockproject_group6.GridViewAdapter;
+import group6.fga.fsoft.com.mockproject_group6.R;
 import group6.fga.fsoft.com.mockproject_group6.controller.Controller;
 import group6.fga.fsoft.com.mockproject_group6.controller.DropState;
 import group6.fga.fsoft.com.mockproject_group6.model.Model;
@@ -27,6 +31,7 @@ import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    LinearLayout mLinearLayoutMain;
     private ImageButton mButtonPrevious;
     private ImageButton mButtonNext;
     private Button mButtonEditLessonName;
@@ -112,32 +117,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (fromTable == GridViewAdapter.GRID_LESSON && toTable == GridViewAdapter.GRID_TIMETABLE) {
 
-                    if (!dropLesson.getName().equals("")) {
+                    if (!dropLesson.getmName().equals("")) {
                         Message msg = new Message();
                         msg.what = Controller.DROP_STATE;
                         msg.arg1 = DropState.REPLACE_LESSON;
+                        msg.arg2 = DropState.FROM_LESSONS_TO_TIMETABLE;
                         mController.sendMessage(msg);
 
-                    } else if (dropLesson.getName().equals("")) {
+                    } else if (dropLesson.getmName().equals("")) {
                         Message msg = new Message();
                         msg.what = Controller.DROP_STATE;
                         msg.arg1 = DropState.ADD_LESSON_TO_TIMETABLE;
                         mController.sendMessage(msg);
                     }
                 } else if (fromTable == GridViewAdapter.GRID_TIMETABLE && toTable == GridViewAdapter.GRID_TIMETABLE) {
-                    if (!dropLesson.getName().equals("")) {
+                    if (!dropLesson.getmName().equals("")) {
                         Message msg = new Message();
                         msg.what = Controller.DROP_STATE;
                         msg.arg1 = DropState.REPLACE_LESSON;
+                        msg.arg2 = DropState.FROM_TIMETABLE_TO_TIMETABLE;
                         mController.sendMessage(msg);
                     }
                 }
             }
         });
-
     }
 
     private void initView() {
+        mLinearLayoutMain = findViewById(R.id.linear_layout_main);
         mButtonPrevious = findViewById(R.id.button_previous);
         mButtonNext = findViewById(R.id.button_next);
         mButtonEditLessonName = findViewById(R.id.button_edit);
@@ -152,11 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mListLesson = new ArrayList<>();
         mListTimetable = new ArrayList<>();
-
-        for (int i = 0; i < 15; i++) {
-            mListLesson.add(new Lesson("English"));
-        }
-        mListLesson.set(3, new Lesson(""));
 
         mListTimetable.add("");
         mListTimetable.add("Monday");
@@ -214,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case Model.UPDATE_DIM_VIEW:  boolean isEditing = (boolean) event.getNewValue();
                 if (isEditing) {
+
                     mRecycleBin.setEnabled(false);
                     mRecycleBin.setAlpha(0.4f);
                     mGridViewTimetable.setAlpha(0.8f);

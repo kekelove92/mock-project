@@ -13,6 +13,7 @@ public class DimViewState extends BaseState {
     @Override
     public void handleMsg(Message msg) {
         Log.e("state",TAG);
-        getModel().setEditingLesson(!getModel().isEditingLesson());
+        getModel().setEditingLesson(!getModel().ismEditingLesson());
+
     }
 }

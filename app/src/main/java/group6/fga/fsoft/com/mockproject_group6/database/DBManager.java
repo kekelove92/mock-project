@@ -1,10 +1,9 @@
-package group6.fga.fsoft.com.mockproject_group6;
+package group6.fga.fsoft.com.mockproject_group6.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 
 import group6.fga.fsoft.com.mockproject_group6.model.Contract;
 
@@ -16,7 +15,7 @@ public class DBManager extends SQLiteOpenHelper {
     String DROP_LESSONTABLE;
     String DROP_TIMETABLE;
     Context context;
-
+    String insertEmptyStringToLessonTable;
 
     public DBManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -29,7 +28,7 @@ public class DBManager extends SQLiteOpenHelper {
         CREATE_LESSONTABLE = "CREATE TABLE "
                 + Contract.TABLE_LESSON + "("
                 + Contract.LESSON_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + Contract.LESSON_NAME + "TEXT NOT NULL" + ")";
+                + Contract.LESSON_NAME + " TEXT NOT NULL" + ")";
         sqLiteDatabase.execSQL(CREATE_LESSONTABLE);
         CREATE_TIMETABLE = "CREATE TABLE "
                 + Contract.TABLE_TIME + "("
@@ -38,6 +37,13 @@ public class DBManager extends SQLiteOpenHelper {
                 + Contract.TIME_COLUMN + "INTEGER NOT NULL, "
                 + Contract.TIME_LESSONID + "INTEGER NOT NULL" + ")";
         sqLiteDatabase.execSQL(CREATE_TIMETABLE);
+
+        for (int i = 0; i < 15; i++) {
+            insertEmptyStringToLessonTable = "INSERT INTO " + Contract.TABLE_LESSON
+                   +" VALUES"+ " (" + i + ", '')";
+            sqLiteDatabase.execSQL(insertEmptyStringToLessonTable);
+        }
+
     }
 
     @Override

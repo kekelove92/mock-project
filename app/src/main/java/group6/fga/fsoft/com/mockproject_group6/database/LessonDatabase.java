@@ -1,29 +1,25 @@
-package group6.fga.fsoft.com.mockproject_group6;
+package group6.fga.fsoft.com.mockproject_group6.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-
-
 import group6.fga.fsoft.com.mockproject_group6.model.Contract;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
 
 
-public class LessonAdapter {
+public class LessonDatabase {
     SQLiteDatabase mSqLiteDatabase;
-    private DBManager dbManager;
 
-    public LessonAdapter(Context c) {
-        dbManager = new DBManager(c);
+    public LessonDatabase(Context c, DBManager dbManager) {
         mSqLiteDatabase = dbManager.getWritableDatabase();
     }
 
     // Add
     public void addLesson(Lesson lesson) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Contract.LESSON_NAME, lesson.getName());
+        contentValues.put(Contract.LESSON_NAME, lesson.getmName());
         mSqLiteDatabase.insert(Contract.TABLE_LESSON, null, contentValues);
     }
 
@@ -59,5 +55,14 @@ public class LessonAdapter {
         return check;
     }
 
+    public int getLessonsCount() {
+        String countQuery = "SELECT  * FROM " + Contract.TABLE_LESSON;
 
+        Cursor cursor = mSqLiteDatabase.rawQuery(countQuery, null);
+
+        int count = cursor.getCount();
+        cursor.close();
+        // return count
+        return count;
+    }
 }

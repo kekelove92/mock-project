@@ -1,4 +1,4 @@
-package group6.fga.fsoft.com.mockproject_group6;
+package group6.fga.fsoft.com.mockproject_group6.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,12 +11,10 @@ import group6.fga.fsoft.com.mockproject_group6.model.Contract;
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Timetable;
 
 
-public class TimeTableAdapter {
+public class TimeTableDatabase {
     SQLiteDatabase mSqLiteDatabase;
-    private DBManager dbManager;
 
-    public TimeTableAdapter(Context c) {
-        dbManager = new DBManager(c);
+    public TimeTableDatabase(Context c, DBManager dbManager) {
         mSqLiteDatabase = dbManager.getWritableDatabase();
     }
 

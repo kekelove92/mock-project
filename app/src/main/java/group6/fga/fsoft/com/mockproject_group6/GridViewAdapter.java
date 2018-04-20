@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import group6.fga.fsoft.com.mockproject_group6.model.entity.Lesson;
+import group6.fga.fsoft.com.mockproject_group6.view.MainActivity;
 
 /**
  * Created by Tu on 18-Apr-18.
@@ -30,6 +31,7 @@ public class GridViewAdapter extends BaseAdapter {
     private List<Object> mList;
     private LayoutInflater mInflater;
     private int mGridType;
+    private MainActivity mMainActivity;
 
     private OnCellDroppedListener mListener;
 
@@ -49,6 +51,7 @@ public class GridViewAdapter extends BaseAdapter {
         this.mList = mList;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mGridType = mGridType;
+        mMainActivity = (MainActivity) context;
     }
 
     @Override
@@ -96,8 +99,20 @@ public class GridViewAdapter extends BaseAdapter {
             case LESSON_ITEM:
 
                 Lesson lesson = (Lesson) mList.get(i);
-                holder.textView.setText(lesson.getName());
-                if (!lesson.getName().equals("")) {
+                holder.textView.setText(lesson.getmName());
+                if (!lesson.getmName().equals("")) {
+
+
+                    holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (mMainActivity.getmModel().ismEditingLesson()) {
+                                // open activity edit lesson name
+                                Log.e("edit lesson name", String.valueOf(i));
+                            }
+                        }
+                    });
+
 
                     holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
 
@@ -208,7 +223,6 @@ public class GridViewAdapter extends BaseAdapter {
 
         return view;
     }
-
 
     static class ViewHolder {
         TextView textView;
